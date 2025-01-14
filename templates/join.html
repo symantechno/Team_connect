@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Join Meeting{% endblock %}
+
+{% block content %}
+<style>
+    .stats {
+    padding: 20px;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: start; /* Aligns items at the start */
+    align-items: center;
+    background-color: #f4f6f9; /* Light background */
+}
+
+.stats h1 {
+    font-size: 2rem;
+    color: #007BFF;
+}
+
+form .form-group input {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+</style>
+<div class="stats container">
+    <h1 class="text-center mt-5">Join Meeting</h1>
+    <form method="POST" action="{{ url_for('join') }}" class="mt-5">
+        <div class="form-group text-center">
+            <input type="text" placeholder="Room ID:" class="form-control w-50 mx-auto" id="roomID" name="roomID" required>
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Join</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.chat-header .chat-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.chat-header span {
+    flex-grow: 1;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.clear-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.clear-button:hover {
+    background-color: #c0392b;
+}
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            position: relative;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: #dcf8c6;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.bot {
+            background: #e8e8e8;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            white-space: pre-wrap;
+        }
+
+        .timestamp {
+            font-size: 0.7em;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        #message-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1em;
+        }
+
+        #send-button {
+            background: #075e54;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        #send-button:hover {
+            background: #128c7e;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: #e8e8e8;
+            border-radius: 15px;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            color: #666;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* General Navbar Styling */
+/* General Navbar Styling */
+.dashboard-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2c3e50; /* Dark background */
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: #ecf0f1; /* Light text color */
+}
+
+/* Brand Styling */
+.nav-brand .brand-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #f1c40f; /* Bright yellow for better visibility */
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.nav-brand .brand-link i {
+    margin-right: 10px;
+    color: #f39c12; /* Bright orange for icon */
+    font-size: 1.5em; /* Slightly larger icon */
+}
+
+/* Hover Effect for Brand */
+.nav-brand .brand-link:hover {
+    color: #e67e22; /* Orange on hover */
+}
+
+.nav-brand .brand-link i:hover {
+    color: #d35400; /* Darker orange on hover for icon */
+}
+
+.nav-brand .MV3Tnb i{
+    color: #d35400; /* Darker orange on hover for icon */
+}
+
+
+
+/* User Section Styling */
+.nav-user .logout-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.nav-user .logout-btn i {
+    margin-right: 5px;
+    color: #e74c3c; /* Logout icon color */
+}
+
+/* Hover Effect for Logout Button */
+.nav-user .logout-btn:hover {
+    color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-brand, .nav-user {
+        margin-bottom: 10px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+    <nav class="dashboard-nav">
+        <div class="nav-user">
+            <a href="{{ url_for('dashboard') }}" class="logout-btn">
+                <i class="fas fa-cube"></i>
+                Dashboard
+            </a>
+        </div>
+        </div>
+        <div class="nav-user">
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </nav>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="{{ url_for('static', filename='images/Obsidian.webp') }}" alt="Chatbot Icon" class="chat-icon">
+            <span>Obsidian AI</span>
+            <button class="clear-button" onclick="clearChat()">Clear Chat</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+        </div>
+        <div class="typing-indicator" id="typing-indicator">
+            Bot is typing<span></span><span></span><span></span>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Load chat history from localStorage
+        function loadChatHistory() {
+            const history = localStorage.getItem('chatHistory');
+            if (history) {
+                const messages = JSON.parse(history);
+                messages.forEach(msg => {
+                    addMessageToUI(msg.text, msg.sender, msg.timestamp);
+                });
+            } else {
+                // Add initial bot message only if there's no history
+                addMessage("Hello, How can I help you?", 'bot');
+            }
+        }
+
+        // Clear chat history
+        function clearChat() {
+            localStorage.removeItem('chatHistory');
+            chatMessages.innerHTML = '';
+            addMessage("Hello, How can I help you?", 'bot');
+        }
+
+        // Save message to localStorage
+        function saveMessage(text, sender, timestamp) {
+            const history = localStorage.getItem('chatHistory');
+            const messages = history ? JSON.parse(history) : [];
+            messages.push({ text, sender, timestamp });
+            localStorage.setItem('chatHistory', JSON.stringify(messages));
+        }
+
+        // Clean message text (remove asterisks)
+        function cleanMessage(text) {
+            return text.replace(/\*/g, '');
+        }
+
+        // Add message to UI
+        function addMessageToUI(text, sender, timestamp) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const messageText = document.createElement('div');
+            messageText.textContent = cleanMessage(text);
+            
+            const timestampDiv = document.createElement('div');
+            timestampDiv.className = 'timestamp';
+            timestampDiv.textContent = timestamp || new Date().toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            messageDiv.appendChild(messageText);
+            messageDiv.appendChild(timestampDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add message (saves to localStorage and adds to UI)
+        function addMessage(text, sender) {
+            const timestamp = new Date().toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            
+            saveMessage(text, sender, timestamp);
+            addMessageToUI(text, sender, timestamp);
+        }
+
+        // Start chat session when page loads
+        fetch('http://localhost:5000/start-chat', {
+            method: 'POST',
+        });
+
+        // Load chat history when page loads
+        loadChatHistory();
+
+        // Send message when button is clicked
+        sendButton.addEventListener('click', sendMessage);
+
+        // Send message when Enter key is pressed
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                // Add user message
+                addMessage(message, 'user');
+                messageInput.value = '';
+
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                try {
+                    // Send message to backend
+                    const response = await fetch('http://localhost:5000/send-message', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: message }),
+                    });
+
+                    const data = await response.json();
+
+                    // Hide typing indicator
+                    typingIndicator.style.display = 'none';
+
+                    if (data.error) {
+                        addMessage("Sorry, I encountered an error. Please try again.", 'bot');
+                    } else {
+                        // Add bot's response
+                        addMessage(data.response, 'bot');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    typingIndicator.style.display = 'none';
+                    addMessage("Sorry, I encountered an error. Please try again.", 'bot');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

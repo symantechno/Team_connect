@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Connect</title>
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a90e2;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #2980b9;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 2;
+            padding: 70px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #f1f3f4;
+            color: #4a90e2;
+            border: 2px solid #4a90e2;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e7e9eb;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, #4a90e2 0%, #2c3e50 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .feature {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            margin: 0 15px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-text">Team Connect</div>
+            </div>
+            <nav>
+                <a href="http://127.0.0.1:5000">Home</a>
+                <a href="\login">Login</a>
+                <a href="\register">register</a>
+                
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Team Connect</h1>
+                <p class="hero-subtitle">The concept of Team Connect revolves around creating a cohesive and efficient team dynamic where collaboration is seamless, communication is clear, and individual contributions align toward a shared vision. Here's a deeper dive into its core principles and strategies:<br><br>
+
+                    1. Unified Communication Tools
+                    Team Connect emphasizes the use of centralized communication platforms (e.g., Slack, Microsoft Teams, Zoom) to facilitate instant and transparent exchanges.
+                    Integration with project management tools (e.g., Trello, Asana) ensures alignment across tasks.<br><br>
+                    2. Streamlined Collaboration
+                    Collaborative environments where team members can share ideas, documents, and feedback in real-time are at the heart of Team Connect.
+                    Cloud-based solutions (e.g., Google Workspace, SharePoint) ensure accessibility and version control.<br><br>
+                    3. Inclusivity and Engagement
+                    Encouraging input from all team members fosters innovation and inclusivity.
+                    Regular check-ins, brainstorming sessions, and workshops ensure everyone’s voice is heard.<br><br>
+                    4. Goal Alignment and Transparency
+                    Clearly defined objectives and metrics help teams stay focused.
+                    Tools like OKRs (Objectives and Key Results) or KPIs (Key Performance Indicators) align individual efforts with organizational goals.<br><br>
+                    5. Continuous Feedback and Growth
+                    Ongoing feedback loops ensure teams can adapt and improve.
+                    Learning management systems and training programs support professional development, keeping teams competitive and motivated.
+                    Benefits of Team Connect<br><br>
+                    
+                    Increased productivity and efficiency.<br>
+                    Enhanced team morale and collaboration.<br>
+                    Reduced communication gaps and misunderstandings.<br>
+                    Stronger alignment with organizational goals.</p>
+                
+            </div>
+            
+            
+        </section>
+
+       

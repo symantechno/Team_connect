@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat App - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<style>
+    .nav-brand a {
+    text-decoration: none;
+}
+
+</style>
+<body>
+    <nav class="dashboard-nav">
+        <div class="nav-brand">
+            <a href="{{ url_for('dashboard') }}">
+                <i class="fas fa-cube"></i>
+                <span>Dashboard</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                Logout
+            </a>
+        </div>
+    </nav>
+    <div class="content">
+        <form method="post" class="buttons">
+            <h1>Chat Rooms</h1>
+            
+            <div class="input-group">
+                <label>Room Code:</label>
+                <input type="text" name="code" value="{{ code }}" placeholder="Enter room code(Press on Create to Create new room)" />
+            </div>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+            <div class="button-group">
+                <button type="submit" name="join" value="1">Join Room</button>
+                <button type="submit" name="create" value="1">Create Room</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Connect</title>
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/team_connect_logo.JPG') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #4a90e2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4a90e2;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #2980b9;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            margin-top: 50px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 50px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #f1f3f4;
+            color: #4a90e2;
+            border: 2px solid #4a90e2;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e7e9eb;
+        }
+
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(135deg, #4a90e2 0%, #2c3e50 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .feature {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            margin: 0 15px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-text">Team Connect</div>
+            </div>
+            <nav>
+                <a href="http://127.0.0.1:5000">Home</a>
+                <a href="\login">Login</a>
+                <a href="\register">register</a>
+                
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Team Connect</h1>
+                <p class="hero-subtitle">Team Connect envisions fostering seamless collaboration and communication among team members, enhancing productivity and innovation. By integrating smart tools and strategies, it aims to break down barriers, ensuring everyone stays aligned and informed. The focus is on creating a supportive, inclusive, and engaging environment where ideas thrive. Team Connect leverages technology to optimize workflows and deliver results efficiently. Ultimately, it strives to empower teams to achieve their collective goals with clarity and confidence.</p>
+                <div class="cta-buttons">
+                    <a href="/login" class="btn btn-primary">Login</a>
+                    <a href="/learn" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/team_connect_logo.JPG') }}" alt="Team Connect">
+            </div>
+            
+        </section>
+
+        <section class="features">
+            <div class="feature">
+                <div class="feature-image">
+                    <img src="{{ url_for('static', filename='images/collaboration.png') }}" alt="collaboration" width="250" height="120">
+                </div>
+                <h3 class="feature-title">collaboration</h3>
+                <p class="feature-description">
+                    Team Connect enables seamless communication and collaboration among team members, regardless of location. This helps increase productivity and fosters a more cooperative environment.
+                </p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <img src="{{ url_for('static', filename='images/centralized.jpeg') }}" alt="Centralized Information" width="250" height="125">
+                </div>
+                <h3 class="feature-title">Centralized Information</h3>
+                <p class="feature-description">
+                    It provides a central hub for all project-related information, documents, and discussions. This makes it easier for teams to access and share important resources, ensuring everyone is on the same page
+                </p>
+                
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <img src="{{ url_for('static', filename='images/streamline_workflow.webp') }}" alt="Streamline Workflow" width="200" height="100">
+                </div>
+                <h3 class="feature-title">Streamline Woekflow</h3>
+                <p class="feature-description">
+                    Team Connect often includes tools for task assignment, tracking, and progress monitoring, which helps teams stay organized and manage their projects efficiently, reducing the risk of missing deadlines or miscommunication.
+                </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
